@@ -1,0 +1,21 @@
+﻿  pch.cpp
+  UnitTest6.3IT.cpp
+E:\Документи\навчання\Pr6.x\PR063\PR063IT\Pr6.3IT\Pr6.3IT.cpp(49,9): warning C4984: 'if constexpr' is a C++17 language extension
+  (compiling source file '/UnitTest6.3IT.cpp')
+      E:\Документи\навчання\Pr6.x\PR063\PR063IT\Pr6.3IT\Pr6.3IT.cpp(49,9):
+      the template instantiation context (the oldest one first) is
+          E:\Документи\навчання\Pr6.x\PR063\PR063IT\Pr6.3IT\Pr6.3IT.cpp(18,14):
+          see reference to function template instantiation 'T Sum<int>(T *,const int)' being compiled
+          with
+          [
+              T=int
+          ]
+  
+E:\Документи\навчання\Pr6.x\PR063\PR063IT\Pr6.3IT\Pr6.3IT.cpp(54,14): warning C4984: 'if constexpr' is a C++17 language extension
+  (compiling source file '/UnitTest6.3IT.cpp')
+  
+E:\Документи\навчання\Pr6.x\PR063\PR063IT\Pr6.3IT\Pr6.3IT.cpp(60,14): warning C4984: 'if constexpr' is a C++17 language extension
+  (compiling source file '/UnitTest6.3IT.cpp')
+  
+     Creating library E:\Документи\навчання\Pr6.x\PR063\PR063IT\UnitTest6.3IT\x64\Debug\UnitTest6.3IT.lib and object E:\Документи\навчання\Pr6.x\PR063\PR063IT\UnitTest6.3IT\x64\Debug\UnitTest6.3IT.exp
+  UnitTest6.3IT.vcxproj -> E:\Документи\навчання\Pr6.x\PR063\PR063IT\UnitTest6.3IT\x64\Debug\UnitTest6.3IT.dll

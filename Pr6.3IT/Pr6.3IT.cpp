@@ -1,68 +1,90 @@
 ﻿#include <iostream>
-#include <string>
+#include <iomanip>
+#include <time.h>
+#include <type_traits>
+
 using namespace std;
 
-int Sum(int* a, const int size);       
-template <typename T>
-T Sum(T* a, const int size);         
-
-int main()
+void Create(int* a, const int size, const int Low, const int High)
 {
-    const int n = 10;
+    for (int i = 0; i < size; i++)
+        a[i] = Low + rand() % (High - Low + 1);
+}
 
-    int a[n] = { 1,2,3,4,5,6,7,8,9,10 };
+template <typename T>
+void CreateTemplate(T* a, const int size, const T Low, const T High)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if constexpr (std::is_integral_v<T>)
+            a[i] = Low + rand() % (High - Low + 1);
+        else
+            a[i] = Low + (T)(rand() % (int)((High - Low) * 10.)) / 10.0; 
+    }
+}
 
-    int s1 = Sum(a, n);
-    cout << "Sum(a, n) = " << s1 << endl;
+void Print(int* a, const int size)
+{
+    for (int i = 0; i < size; i++)
+        cout << setw(6) << a[i];
+    cout << endl;
+}
 
-    int s2 = Sum<int>(a, n);
-    cout << "Sum<int>(a, n) = " << s2 << endl;
-
-    double b[n] = { 1.1, 2.2, 3.3, 4.3, 5.5, 6.6, 7.7, 8.8, 9.9, 10.0 };
-    double s3 = Sum<double>(b, n); 
-    cout << "Sum<double>(b, n) = " << s3 << endl;
-
-    string c[n] = { "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "10 " };
-    string s4 = Sum<string>(c, n);
-    cout << "Sum<string>(c, n) = " << s4 << endl;
-
-    return 0;
+template <typename T>
+void PrintTemplate(T* a, const int size)
+{
+    for (int i = 0; i < size; i++)
+        cout << setw(6) << a[i];
+    cout << endl;
 }
 
 int Sum(int* a, const int size)
 {
-    int s = 0;
-    for (int i = 0; i < size; ++i)
+    int sum = 0;
+    for (int i = 0; i < size; i++)
     {
-        if (a[i] % 2 != 0)   // стало: беремо тільки непарні
-            s += a[i];
+        if (a[i] % 2 != 0)  
+            sum += a[i];
     }
-    return s;
+    return sum;
 }
 
 template <typename T>
-T Sum(T* a, const int size)
+T SumTemplate(T* a, const int size)
 {
-    T s = T();
-    for (int i = 0; i < size; ++i)
+    T sum = 0;
+    for (int i = 0; i < size; i++)
     {
-        if constexpr (std::is_same_v<T, int>)
-        {
-            if (a[i] % 2 != 0)
-                s += a[i];
-        }
-        else if constexpr (std::is_same_v<T, double>)
-        {
-            long long whole = static_cast<long long>(a[i]);
-            if (whole % 2 != 0)
-                s += a[i];
-        }
-        else if constexpr (std::is_same_v<T, std::string>)
-        {
-            int val = std::stoi(a[i]);
-            if (val % 2 != 0)
-                s += a[i];  
-        }
+        if (a[i] % 2 != 0)
+            sum += a[i];
     }
-    return s;
+    return sum;
+}
+
+int main()
+{
+    srand((unsigned)time(NULL));
+
+    const int n = 10;
+    const int Low = -20;
+    const int High = 20;
+
+    int a[n];
+    Create(a, n, Low, High);
+    cout << "Array : ";
+    Print(a, n);
+
+    int s1 = Sum(a, n);
+    cout << "Sum: " << s1 << endl;
+    cout << endl;
+
+    long b[n];
+    CreateTemplate<long>(b, n, Low, High);
+    cout << "Array Template: ";
+    PrintTemplate(b, n);
+
+    long s2 = SumTemplate<long>(b, n);
+    cout << "Sum template: " << s2 << endl;
+
+    return 0;
 }
